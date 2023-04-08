@@ -1,10 +1,38 @@
-import React from 'react'
+/*import React from 'react'
 import '../styles/App.css';
 const App = () => {
 
   return (
     <div id="main">
       <div className="date-time"></div>
+    </div>
+  )
+}
+
+
+export default App;*/
+
+import React, { useEffect, useState } from 'react'
+import '../styles/App.css';
+const App = () => {
+
+  const [timeStr, setTimeStr] = useState(new Date());
+
+  const interval = setInterval(() => {
+    setTimeStr(new Date());
+  }, 1000);
+
+  useEffect(() => {
+    return () => {
+      clearInterval(interval);
+    }
+  }, []);
+
+  return (
+    <div id="main">
+      <div className="date-time">
+        {timeStr.toLocaleDateString() + ", " + timeStr.toLocaleTimeString()}
+      </div>
     </div>
   )
 }
